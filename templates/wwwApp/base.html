@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html5>
+<html lang="fr">
+<head>
+<!--    <link rel="stylesheet" href="{% static 'wwwApp/style.css' %}"/>-->
+    <link rel="stylesheet" href="{% static 'styles.css' %}"/>
+    <!-- ajouter une police d'ecriture -->
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+    <!-- je prend en compte les accents -->
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href="https://bootswatch.com/4/united/bootstrap.min.css" rel="stylesheet" >
+
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #90AEA3">
+  <a class="navbar-brand" href="{% url 'home' %}">Compagnie aérienne</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    {% with url_name=request.resolver_match.url_name %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if url_name == 'home' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'home' %}">Acceuil <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    {% endwith %}
+    <form class="form-inline my-2 my-lg-0">
+      {% block login %} {% endblock %}
+<!--      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
+  </div>
+</nav>
+
+<header >
+{% block search %}  {% endblock %}
+</header>
+
+<div style="margin-left:20px; margin-top:20px">
+{% block contents %}   {% endblock %}
+</div>
+
+<footer class="footer" style="margin-left:20px; margin-top:20px">
+  <small>
+
+  </small>
+</footer>
+
+
+
+</body>
+</html>

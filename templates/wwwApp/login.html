@@ -1,0 +1,16 @@
+{% block login %}
+        {% if user.is_anonymous  %}
+            <a> Vous n'êtes pas connecté </a>
+                <a href="{% url 'login_page' %}" style="background-color: #39A215; color: #3D3434;margin:10px" class="btn btn-outline-success" role="button">Se connecter</a>
+                <a href="{% url 'signup' %}" style="background-color: #39A215; color: #3D3434;margin:10px"class="btn btn-outline-success" role="button">S'inscrire </a>
+        {% else %}
+            {% if user.is_superuser %}
+                <a> Vous êtes l'administrateur {{ user }} </a>
+                <a href="/admin/"  style="background-color: #39A215; color: #3D3434;margin:10px "class="btn btn-outline-success" role="button">Site d'administration</a>
+                <a href="{% url 'logout' %}" style="background-color: #39A215; color: #3D3434;margin:10px"class="btn btn-outline-success" role="button">Se déconnecter </a>
+            {% else %}
+                <a> Vous êtes connecté  en tant que {{ user }}</a>
+                <a href="{% url 'logout' %}" style="background-color: #39A215; color: #3D3434;margin:10px" class="btn btn-outline-success" role="button">Se déconnecter </a>
+            {% endif %}
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'wwwApp/base_2.html' %}
+
+{% block login %}
+    {% include 'wwwApp/login.html' %}
+{% endblock %}
+
+{% block contents %}
+{% if error and client %}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-sm-3">
+            <div class="card border-primary mb-3" style="max-width: 25rem;">
+              <div class="card-header">Détails de votre billet </div>
+                  <div class="card-body">
+                    <h6 class="card-title"><b>Nom:  </b> {{ client.prenom }}  {{ client.nom }}</h6>
+                    <h6><b>    </b> {{ error }}  </h6>
+                  </div>
+            </div>
+            <div class="card-header"> Nous vous souhaitons un bon voyage </div>
+
+            <a href="{% url 'home' %}" class="btn btn-outline-success" role="button" >Retour </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if passenger and flight and  billet %}
+<div class="container">
+    <div class="row">
+        <div class="offset-sm-3">
+            <div class="card border-primary mb-3" style="max-width: 25rem;">
+              <div class="card-header">Détails de votre billet </div>
+                  <div class="card-body">
+                    <h6 class="card-title"><b>Nom:  </b> {{ passenger.prenom }}  {{ passenger.nom }}</h6>
+                    <h6><b>Aéroport de Départ:      </b> {{ flight.liaison.aeroport_depart.nom }}</h6>
+                    <h6><b>Aéroport d'arrivée:      </b> {{ flight.liaison.aeroport_destination.nom }}</h6>
+                    <h6><b>Date de Départ:          </b> {{ flight.date_depart }}  à  {{ flight.heure_depart }} </h6>
+                    <h6><b>Date d'arrivée:          </b> {{ flight.date_arrivee }}  à  {{ flight.heure_arrivee }}</h6>
+                    <h6><b>Numéro du billet:        </b> {{ billet.id }}    </h6>
+                    <h6><b>Date de réservation:     </b> {{ billet.date }}  </h6>
+                  </div>
+            </div>
+            <div class="card-header"> Nous vous souhaitons un bon voyage </div>
+
+            <a href="{% url 'home' %}" class="btn btn-outline-success" role="button" >Retour </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

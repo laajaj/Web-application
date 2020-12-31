@@ -1,0 +1,39 @@
+{% extends 'wwwApp/base_2.html' %}
+
+{% block login %}
+    {% include 'wwwApp/login.html' %}
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+{% block contents %}
+    <div class="container panel properties" style="background-color: #14BB8B;
+            margin: 100px auto; width: 300px; height: auto;">
+
+        <h2> Inscription </h2>
+        <form method="post" >
+            {% csrf_token %}
+            {% for field in form %}
+                <p>
+                    {% if field.label_tag != '<label for="id_username">Username:</label>'  %}
+                        {{ field.label_tag }}
+                    {% else %}
+                        <label for="id_username">Utilisateur:</label>
+                    {% endif %}
+                    <br/>
+                    {{ field }}
+
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+            <div class="button-submit">
+                <button id="signup"  type="submit" class="btn btn-primary mb-2" style="background-color:#2E3E42;border:none;"> S'inscrire  </button>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}

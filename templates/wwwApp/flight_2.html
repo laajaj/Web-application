@@ -1,0 +1,44 @@
+
+{% block contents %}
+ <h4> Affichage des vols disponibles  </h4>
+
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">N de vol</th>
+      <th scope="col">Aéroport de départ</th>
+      <th scope="col">Date de départ</th>
+      <th scope="col">Heure de départ</th>
+      <th scope="col">Aéroport de destination</th>
+      <th scope="col">Date d'arrivée</th>
+      <th scope="col">Heure d'arrivée</th>
+      <th scope="col">Détail de vol</th>
+    </tr>
+  </thead>
+  <tbody>
+{% if error_message_flight %}
+        <div class="container panel properties" style="color: red; margin: 0px 40%;">
+            <strong>{{ error_message_flight }}</strong>
+        </div>
+{% endif %}
+{% if flights %}
+
+    {% for flight in flights %}
+        <tr>
+          <td>{{ flight.id }}</td>
+          <td>{{ flight.liaison.aeroport_depart.nom }} </td>
+          <td>{{ flight.date_depart }}</td>
+          <td>{{ flight.heure_depart }}</td>
+          <td>{{ flight.liaison.aeroport_destination.nom }} </td>
+          <td>{{ flight.date_arrivee }}</td>
+          <td>{{ flight.heure_arrivee }}</td>
+          <td> <a href="{% url 'flight_details' flight.id %}" class="btn btn-outline-success" role="button">Détail</a>   </td>
+        </tr>
+    {% endfor %}
+
+{% endif %}
+
+  </tbody>
+</table>
+{% endblock %}

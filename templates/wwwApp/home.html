@@ -1,0 +1,45 @@
+{% extends 'wwwApp/base.html' %}
+
+{% block login %}
+    {% include 'wwwApp/login.html' %}
+{% endblock %}
+
+
+{% block search %}
+
+<div class="search-form">
+    <!-- Formulaire de recherche -->
+    <form method="POST" action="{% url 'search'%}" role="form" >
+    {% csrf_token %}
+        <div class="form-control" style="background-color: #6BBCD4; border:none">
+            <label for="ville_depart">Ville de départ</label>
+            <input type="text" name="ville_depart" id="ville_depart" placeholder="Lyon, Madrid, ..." >
+
+            <label for="ville_destination">Ville d'arrivée</label>
+            <input type="text" name="ville_destination" id="ville_destination" placeholder="Lyon, Madrid, ..." >
+
+            <label for="depart">Date de départ</label>
+            <input type="date" name="date_depart" id="depart" value="13/04/2020">
+
+<!--            <label for="retour">Date de Retour</label>-->
+<!--            <input type="date" name="date_retour" id="retour" value="14/04/2020">-->
+        </div>
+
+        <div class="button-submit">
+            <button type="submit" class="btn btn-primary mb-2" style="background-color:#2E3E42;border:none;"> Rechercher </button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block contents %}
+
+    {% include 'wwwApp/flight_2.html' %}
+
+{% endblock %}
+

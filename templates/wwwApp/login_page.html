@@ -1,0 +1,48 @@
+{% extends 'wwwApp/base_2.html' %}
+
+{% block login %}
+    {% include 'wwwApp/login.html' %}
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block contents %}
+<!--<div class="row h-70 justify-content-center " >-->
+<div class="container panel properties" style="background-color: #14BB8B;
+            margin: 100px auto; width: 300px; height: auto;">
+
+    {% if form.errors %}
+        <p style="color: red">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p style="color: red" >Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+            <p style="color: red" >Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login_page' %}" >
+    {% csrf_token %}
+    <p>
+        <div > {{ form.username.label_tag }}</div>
+        <div > {{ form.username }}</div>
+        <div > {{ form.password.label_tag }}</div>
+        <div > {{ form.password }}</div>
+
+    </p>
+    <div class="button-submit">
+        <button  type="submit" class="btn btn-primary mb-2" style="background-color:#2E3E42;border:none;"> login </button>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+     {# Assumes you setup the password_reset view in your URLconf #}
+<!--    <p> <a href="{% url 'home' %}"> Lost password?</a></p>-->
+    </form>
+
+
+</div>
+{% endblock %}
